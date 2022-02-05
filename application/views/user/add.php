@@ -21,7 +21,7 @@
                         </div>
                         <p class="text-center mb-5"><?=$this->session->userdata('fullname')?></p>
                         <div class="row mx-2">
-                            <a href="<?=base_url('Admin')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data Items</a>
+                            <a href="<?=base_url('User')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data Items</a>
                         </div>
                     </div>
                 </div>
@@ -32,40 +32,41 @@
                         <h5>Add Items</h5>
                     </div>
                     <div class="card-body">
-                        <form action="<?=base_url('Admin/addNewDataItems')?>" method="POST" enctype="multipart/form-data">
+                        <form action="<?=base_url('User/addNewDataItems')?>" method="POST" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="">Title</label>
-                                        <input type="text" class="form-control" id="title" name="title" required>
+                                        <label for="">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="">Section</label>
-                                        <select class="form-control" name="section" id="section" class="form-control">
-                                            <option value="#">- Choose Section -</option>
-                                            <option value="Team">Team</option>
-                                            <option value="Services">Services</option>
-                                        </select>
+                                        <label for="">First Name</label>
+                                        <input type="text" class="form-control" id="firstname" name="firstname" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="">Last Name</label>
+                                        <input type="text" class="form-control" id="lastname" name="lastname" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Caption</label>
-                                        <textarea name="caption" id="caption" cols="30" rows="10" class="form-control"></textarea>
+                                        <label for="">Role</label>
+                                        <select class="form-control" name="role" id="role" class="form-control">
+                                            <option value="#" selected>- Choose Section -</option>
+                                            <option value="Master">Master</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Author</label>
-                                        <input type="text" name="author" id="author" class="form-control" value="<?=$this->session->userdata('fullname')?>" readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Image</label>
-                                        <input type="file" name="data_image" id="data_image" class="form-control-file">
+                                        <label for="">Password</label>
+                                        <input type="password" name="password" id="password" class="form-control">
                                     </div>
                                 </div>
                             </div>

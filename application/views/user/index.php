@@ -51,37 +51,35 @@
                 ?>
                 <div class="card">
                     <div class="card-header">
-                        <a href="<?=base_url('Admin/Add')?>" class="btn btn-success"><i class="fas fa-plus"></i> Add Data</a>
+                        <a href="<?=base_url('User/Add')?>" class="btn btn-success"><i class="fas fa-plus"></i> Add Data</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <thead class="thead-dark text-center">
                                 <th>#</th>
-                                <th>TITLE</th>
-                                <th>SECTION</th>
-                                <th>CAPTION</th>
-                                <th>IMAGE</th>
-                                <th>AUTHOR</th>
+                                <th>USERNAME</th>
+                                <th>FIRST NAME</th>
+                                <th>LAST NAME</th>
+                                <th>ROLE</th>
                                 <th>CREATED AT</th>
                                 <th>ACTION</th>
                             </thead>
                             <tbody>
                                 <?php
                                 $no = 1;
-                                foreach ($postingan as $data) 
+                                foreach ($user as $data) 
                                 {
                                 ?>
                                     <tr>
                                         <td width="70px" class="text-center"><?=$no++?>.</td>
-                                        <td width="200px"><?=$data->data_title?></td>
-                                        <td width="100px"><?=$data->data_role?></td>
-                                        <td><?=$data->data_caption?></td>
-                                        <td width="100px" class="text-center"><img src="<?=$data->data_image?>" alt="" class="img-fluid" width="100px" height="100px"></td>
-                                        <td width="100px"><?=$data->user_name?></td>
-                                        <td width="120px" class="text-center"><?=$data->data_created_at?></td>
+                                        <td width="200px"><?=$data->user_name?></td>
+                                        <td width="100px"><?=$data->user_first_name?></td>
+                                        <td width="100px"><?=$data->user_last_name?></td>
+                                        <td width="100px"><?=$data->user_role?></td>
+                                        <td width="120px" class="text-center"><?=$data->user_created_at?></td>
                                         <td width="150px" class="text-center">
-                                            <a href="<?=base_url('Admin/edit/'.$data->data_id)?>" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i></a>
-                                            <a href="<?=base_url('Admin/delete/'.$data->data_id)?>" type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                            <a href="<?=base_url('User/edit/'.$data->user_id)?>" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i></a>
+                                            <a href="<?=base_url('User/delete/'.$data->user_id)?>" type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 <?php

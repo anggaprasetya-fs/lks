@@ -46,7 +46,7 @@ class Admin extends CI_Controller
                     'data_role'     => $this->input->post('section'),
                     'data_caption'  => $this->input->post('caption'),
                     'data_image'    => base_url().'/assets/img/items/'.$filename,
-                    'data_author'   => 0
+                    'data_author'   => $this->session->userdata('id')
                 ];
 
                 $enter      = $this->Admin_m->save($data);
@@ -98,7 +98,7 @@ class Admin extends CI_Controller
                 'data_role'     => $this->input->post('section'),
                 'data_caption'  => $this->input->post('caption'),
                 'data_image'    => base_url().'/assets/img/items/'.$filename,
-                'data_author'   => 0
+                'data_author'   => $this->session->userdata('id')
             ];
 
             $enter      = $this->Admin_m->edit($data, $this->input->post('id'));
@@ -132,9 +132,9 @@ class Admin extends CI_Controller
 
     public function sample()
     {
-        // $enter = $this->Admin_m->getLastDataId();
+        $enter = $this->Admin_m->getLastDataId();
         echo '<pre>';
-        print_r($this->session->has_userdata('login'));
+        print_r($enter->result());
     }
 }
 

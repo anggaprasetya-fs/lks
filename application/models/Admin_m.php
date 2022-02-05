@@ -9,7 +9,10 @@ class Admin_m extends CI_Model
 
     function getData()
     {
-        return $this->db->order_by('data_id', 'ASC')->get('t_data');
+        $this->db->select('*');
+        $this->db->from('t_data');
+        $this->db->join('t_user', 't_data.data_author = t_user.user_id');
+        return $this->db->get();
     }
 
     function getLastDataId()
@@ -34,7 +37,11 @@ class Admin_m extends CI_Model
 
     function getSpesificDataById($id)
     {
-        return $this->db->get_where('t_data', ['data_id' => $id]);
+        $this->db->select('*');
+        $this->db->from('t_data');
+        $this->db->where('data_id', $id);
+        $this->db->join('t_user', 't_data.data_author = t_user.user_id');
+        return $this->db->get();
     }
 
     function delete($id)

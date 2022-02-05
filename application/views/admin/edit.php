@@ -19,7 +19,7 @@
                         <div class="row mt-2 align-items-center text-center">
                             <img src="https://bootstrapmade.com/demo/templates/FlexStart/assets/img/testimonials/testimonials-4.jpg" class="rounded mx-auto d-block img-fluid img-thumbnail" width="100px" height="100px">
                         </div>
-                        <p class="text-center mb-5">Angga Prasetya</p>
+                        <p class="text-center mb-5"><?=$this->session->userdata('fullname')?></p>
                         <div class="row mx-2">
                             <a href="<?=base_url('Admin')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data Items</a>
                         </div>
@@ -66,7 +66,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="">Author</label>
-                                        <input type="text" name="author" id="author" class="form-control" value="<?=$data->data_author?>" readonly>
+                                        <input type="text" name="author" id="author" class="form-control" value="<?=$data->user_name?>" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Image <span class="text-danger">*Choose image if needed to edit</span></label>

@@ -48,6 +48,7 @@ class Home extends CI_Controller {
         if ($enter->num_rows() > 0) 
         {
             $sessArray  = [
+				'id'		=> $enter->result()[0]->user_id,
                 'name'      => $enter->result()[0]->user_name,
                 'fullname'  => $enter->result()[0]->user_first_name.' '.$enter->result()[0]->user_last_name,
                 'login'     => TRUE
