@@ -1,0 +1,187 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.1
+-- Dumped by pg_dump version 14.1
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: t_data; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.t_data (
+    data_id integer DEFAULT (currval((pg_get_serial_sequence('t_data'::text, 'data_id'::text))::regclass) + 1) NOT NULL,
+    data_title character varying(255) NOT NULL,
+    data_role character varying(255) NOT NULL,
+    data_caption text NOT NULL,
+    data_image character varying(255) NOT NULL,
+    data_author integer NOT NULL,
+    data_created_at date DEFAULT now() NOT NULL,
+    data_deleted_at date
+);
+
+
+ALTER TABLE public.t_data OWNER TO postgres;
+
+--
+-- Name: t_data_data_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.t_data_data_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.t_data_data_id_seq OWNER TO postgres;
+
+--
+-- Name: t_data_data_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.t_data_data_id_seq OWNED BY public.t_data.data_id;
+
+
+--
+-- Name: t_user; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.t_user (
+    user_id integer NOT NULL,
+    user_name character varying(255) NOT NULL,
+    user_first_name character varying(255) NOT NULL,
+    user_last_name character varying(255) NOT NULL,
+    user_role character varying(100) NOT NULL,
+    user_password character varying(255) NOT NULL,
+    user_created_at date DEFAULT now(),
+    user_deleted_at date
+);
+
+
+ALTER TABLE public.t_user OWNER TO postgres;
+
+--
+-- Name: t_user_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.t_user_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.t_user_user_id_seq OWNER TO postgres;
+
+--
+-- Name: t_user_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.t_user_user_id_seq OWNED BY public.t_user.user_id;
+
+
+--
+-- Name: t_user user_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.t_user ALTER COLUMN user_id SET DEFAULT nextval('public.t_user_user_id_seq'::regclass);
+
+
+--
+-- Data for Name: t_data; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.t_data (data_id, data_title, data_role, data_caption, data_image, data_author, data_created_at, data_deleted_at) FROM stdin;
+1	ddddddddd	Services	ddddddddd	http://localhost/lks//assets/img/items/Services-61fe131094862-05-02-2022.jpg	2	2022-02-05	\N
+2	bbbbbbbb	Team	bbbbbbbb	http://localhost/lks//assets/img/items/Team-61fdfcd6e4bee-05-02-2022.png	1	2022-02-05	\N
+\.
+
+
+--
+-- Data for Name: t_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.t_user (user_id, user_name, user_first_name, user_last_name, user_role, user_password, user_created_at, user_deleted_at) FROM stdin;
+1	admin@azzara.com	Angga	Prasetya	Master	5f4dcc3b5aa765d61d8327deb882cf99	2022-02-03	\N
+2	admin@admin.com	Admin	Intrator	Master	5f4dcc3b5aa765d61d8327deb882cf99	2022-02-04	\N
+3	member@ecourse.com	ANGGA	SAPUTRA	Master	d41d8cd98f00b204e9800998ecf8427e	2022-02-05	\N
+4	anggaprasetya	Admin	Nih	Master	5b851391416402b2b6f493295d80472a	2022-02-05	\N
+\.
+
+
+--
+-- Name: t_data_data_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.t_data_data_id_seq', 3, true);
+
+
+--
+-- Name: t_user_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.t_user_user_id_seq', 1, false);
+
+
+--
+-- Name: t_data t_data_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.t_data
+    ADD CONSTRAINT t_data_pkey PRIMARY KEY (data_id);
+
+
+--
+-- Name: t_user t_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.t_user
+    ADD CONSTRAINT t_user_pkey PRIMARY KEY (user_id);
+
+
+--
+-- Name: t_data_indexes; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX t_data_indexes ON public.t_data USING btree (data_id) INCLUDE (data_id);
+
+
+--
+-- Name: user_indexes; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX user_indexes ON public.t_user USING btree (user_id);
+
+
+--
+-- Name: t_data author_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.t_data
+    ADD CONSTRAINT author_fk FOREIGN KEY (data_author) REFERENCES public.t_user(user_id) NOT VALID;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
