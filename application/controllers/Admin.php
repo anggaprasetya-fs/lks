@@ -16,57 +16,65 @@ class Admin extends CI_Controller
 
     public function index()
     {
-        $data['postingan'] = $this->Admin_m->getData()->result();
+        $enter = $this->session->userdata('role') == TRUE ? $this->Admin_m->getData() : $this->Admin_m->getDataByUser($this->session->userdata('id'));
+        
+        if($enter->result() > 0)
+        {
+            $data['postingan'] = $enter->result();
+        }
+        
         $this->load->view('admin/index', $data);
     }
 
     public function viewAdd()
     {
-        $this->load->view('admin/add');
+        $data['kategori']   = $this->Admin_m->getKategori()->result();
+        $data['umkm']       = $this->Admin_m->getUmkm()->result();
+        $this->load->view('admin/add', $data);
     }
 
     public function addNewDataItems()
     {
-        $newId  = $this->Admin_m->getLastDataId()->result()[0]->data_id+1;
+        $newId  = $this->Admin_m->getLastDataId()->result()[0]->id_barang+1;
         
-        // {
-            $config['upload_path']      = './assets/img/items/';
-            $config['allowed_types']    = 'jpg|png|jpeg|gif';
-            $config['file_name']        = $this->input->post('section').'-'.uniqid().date('-d-m-Y');
+        $config['upload_path']      = './assets/img/items/';
+        $config['allowed_types']    = 'jpg|png|jpeg|gif';
+        $config['file_name']        = $this->input->post('nama_barang').'-'.uniqid().date('-d-m-Y');
 
-            $this->upload->initialize($config);
+        $this->upload->initialize($config);
 
-            if ($this->upload->do_upload('data_image'))
+        if ($this->upload->do_upload('gambar'))
+        {
+            $filename   = $this->upload->data('file_name');
+
+            $data       = [
+                'id_barang'         => (int)$newId,
+                'nama_barang'       => $this->input->post('nama_barang'),
+                'deskripsi_barang'  => $this->input->post('deskripsi_barang'),
+                'harga_barang'      => $this->input->post('harga_barang'),
+                'gambar_barang'     => '/assets/img/items/'.$filename,
+                'umkm_penjual'      => $this->session->userdata('id'),
+                'kategori_barang'   => $this->input->post('kategori_barang'),
+            ];
+
+            $enter      = $this->Admin_m->save($data);
+
+            if ($enter == true) 
             {
-                $filename   = $this->upload->data('file_name');
-
-                $data       = [
-                    'data_id'       => (int)$newId,
-                    'data_title'    => $this->input->post('title'),
-                    'data_role'     => $this->input->post('section'),
-                    'data_caption'  => $this->input->post('caption'),
-                    'data_image'    => base_url().'/assets/img/items/'.$filename,
-                    'data_author'   => $this->session->userdata('id')
-                ];
-
-                $enter      = $this->Admin_m->save($data);
-
-                if ($enter == true) 
-                {
-                    $this->session->set_flashdata('successInsertData', 'Successfully Insert Data');
-                    redirect('Admin');
-                }
+                $this->session->set_flashdata('successInsertData', 'Successfully Insert Data');
+                redirect('Admin');
             }
-            else
-            {
-                print_r($this->upload->display_errors());
-            }
-        // }
+        }
+        else
+        {
+            print_r($this->upload->display_errors());
+        }
     }
 
     public function getItemsById($id)
     {
-        $data['edit']   = $this->Admin_m->getSpesificDataById($id)->result();
+        $data['edit']       = $this->Admin_m->getSpesificDataById($id)->result();
+        $data['kategori']   = $this->Admin_m->getKategori()->result();
         $this->load->view('Admin/edit', $data);
     }
 
@@ -85,20 +93,22 @@ class Admin extends CI_Controller
     {
         $config['upload_path']      = './assets/img/items/';
         $config['allowed_types']    = 'jpg|png|jpeg|gif';
-        $config['file_name']        = $this->input->post('section').'-'.uniqid().date('-d-m-Y');
+        $config['file_name']        = $this->input->post('nama_barang').'-'.uniqid().date('-d-m-Y');
 
         $this->upload->initialize($config);
 
-        if ($this->upload->do_upload('data_image'))
+        if ($this->upload->do_upload('gambar'))
         {
             $filename   = $this->upload->data('file_name');
 
             $data       = [
-                'data_title'    => $this->input->post('title'),
-                'data_role'     => $this->input->post('section'),
-                'data_caption'  => $this->input->post('caption'),
-                'data_image'    => base_url().'/assets/img/items/'.$filename,
-                'data_author'   => $this->session->userdata('id')
+                'nama_barang'       => $this->input->post('nama_barang'),
+                'deskripsi_barang'  => $this->input->post('deskripsi_barang'),
+                'harga_barang'      => $this->input->post('harga_barang'),
+                'gambar_barang'     => '/assets/img/items/'.$filename,
+                // 'umkm_penjual'      => $this->session->userdata('id'),
+                'umkm_penjual'      => 1,
+                'kategori_barang'   => $this->input->post('kategori_barang'),
             ];
 
             $enter      = $this->Admin_m->edit($data, $this->input->post('id'));
@@ -107,10 +117,6 @@ class Admin extends CI_Controller
             {
                 $this->session->set_flashdata('successInsertData', 'Successfully Edit Data');
                 redirect('Admin');
-            }
-            else 
-            {
-                echo $enter;
             }
         }
         else
@@ -132,9 +138,9 @@ class Admin extends CI_Controller
 
     public function sample()
     {
-        $enter = $this->Admin_m->getLastDataId();
+        $newId  = $this->Admin_m->getDataByUser('1')->result();
         echo '<pre>';
-        print_r($enter->result());
+        print_r($newId);
     }
 }
 

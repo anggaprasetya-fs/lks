@@ -12,9 +12,14 @@ class User_m extends CI_Model
         return $this->db->get('t_user');
     }
 
+    function searchDataById($id)
+    {
+        return $this->db->get_where('t_barang', ['umkm_penjual' => $id]);
+    }
+
     function getLastDataId()
     {
-        return $this->db->select_max('user_id')->get('t_user');
+        return $this->db->select_max('id_user')->get('t_user');
     }
 
     function save($data)
@@ -24,17 +29,17 @@ class User_m extends CI_Model
 
     function getSpesificDataById($id)
     {
-        return $this->db->get_where('t_user', ['user_id' => $id]);
+        return $this->db->get_where('t_user', ['id_user' => $id]);
     }
 
     function edit($data, $id)
     {
-        return $this->db->update('t_user', $data, ['user_id' => $id]);
+        return $this->db->update('t_user', $data, ['id_user' => $id]);
     }
 
     function delete($id)
     {
-        return $this->db->delete('t_user', ['user_id' => $id]);
+        return $this->db->delete('t_user', ['id_user' => $id]);
     }
 }
 

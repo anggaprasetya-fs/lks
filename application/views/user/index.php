@@ -19,10 +19,13 @@
                         <div class="row mt-2 align-items-center text-center">
                             <img src="https://bootstrapmade.com/demo/templates/FlexStart/assets/img/testimonials/testimonials-4.jpg" class="rounded mx-auto d-block img-fluid img-thumbnail" width="100px" height="100px">
                         </div>
-                        <p class="text-center mb-1"><?=$this->session->userdata('fullname')?></p>
+                        <p class="text-center mb-1"><?=$this->session->userdata('umkm')?></p>
                         <a href="<?=base_url('Admin/logout')?>" class="btn btn-danger mb-5"><i class="fas fa-sign-out-alt"></i> Log Out</a>
                         <div class="row mx-2 my-2">
                             <a href="<?=base_url('Admin')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data Items</a>
+                        </div>
+                        <div class="row mx-2 my-2">
+                            <a href="<?=base_url('Kategori')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data Kategori</a>
                         </div>
                         <div class="row mx-2 my-2">
                             <a href="<?=base_url('User')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data Users</a>
@@ -49,6 +52,24 @@
                 <?php
                 }
                 ?>
+                <?php if($this->session->flashdata('failedInsertData'))
+                {    
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?=$this->session->flashdata('failedInsertData');?>
+                    </div>  
+                <?php
+                }
+                ?>
+                <?php if($this->session->flashdata('havePost'))
+                {    
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?=$this->session->flashdata('havePost');?>
+                    </div>  
+                <?php
+                }
+                ?>
                 <div class="card">
                     <div class="card-header">
                         <a href="<?=base_url('User/Add')?>" class="btn btn-success"><i class="fas fa-plus"></i> Add Data</a>
@@ -57,10 +78,9 @@
                         <table class="table table-bordered">
                             <thead class="thead-dark text-center">
                                 <th>#</th>
-                                <th>USERNAME</th>
-                                <th>FIRST NAME</th>
-                                <th>LAST NAME</th>
-                                <th>ROLE</th>
+                                <th>NAMA USER</th>
+                                <th>NAMA UMKM</th>
+                                <th>LOKASI UMKM</th>
                                 <th>CREATED AT</th>
                                 <th>ACTION</th>
                             </thead>
@@ -72,14 +92,13 @@
                                 ?>
                                     <tr>
                                         <td width="70px" class="text-center"><?=$no++?>.</td>
-                                        <td width="200px"><?=$data->user_name?></td>
-                                        <td width="100px"><?=$data->user_first_name?></td>
-                                        <td width="100px"><?=$data->user_last_name?></td>
-                                        <td width="100px"><?=$data->user_role?></td>
-                                        <td width="120px" class="text-center"><?=$data->user_created_at?></td>
+                                        <td width="200px"><?=$data->nama_user?></td>
+                                        <td width="100px"><?=$data->nama_umkm?></td>
+                                        <td width="100px"><?=$data->lokasi_umkm?></td>
+                                        <td width="120px" class="text-center"><?=$data->created_at?></td>
                                         <td width="150px" class="text-center">
-                                            <a href="<?=base_url('User/edit/'.$data->user_id)?>" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i></a>
-                                            <a href="<?=base_url('User/delete/'.$data->user_id)?>" type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                            <a href="<?=base_url('User/edit/'.$data->id_user)?>" type="submit" class="btn btn-warning"><i class="fas fa-pen"></i></a>
+                                            <a href="<?=base_url('User/delete/'.$data->id_user)?>" type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 <?php

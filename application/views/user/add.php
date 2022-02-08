@@ -19,9 +19,9 @@
                         <div class="row mt-2 align-items-center text-center">
                             <img src="https://bootstrapmade.com/demo/templates/FlexStart/assets/img/testimonials/testimonials-4.jpg" class="rounded mx-auto d-block img-fluid img-thumbnail" width="100px" height="100px">
                         </div>
-                        <p class="text-center mb-5"><?=$this->session->userdata('fullname')?></p>
+                        <p class="text-center mb-5"><?=$this->session->userdata('umkm')?></p>
                         <div class="row mx-2">
-                            <a href="<?=base_url('User')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data Items</a>
+                            <a href="<?=base_url('User')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data User</a>
                         </div>
                     </div>
                 </div>
@@ -34,36 +34,37 @@
                     <div class="card-body">
                         <form action="<?=base_url('User/addNewDataItems')?>" method="POST" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Username</label>
+                                        <label for="">Nama User</label>
                                         <input type="text" class="form-control" id="username" name="username" required>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">First Name</label>
-                                        <input type="text" class="form-control" id="firstname" name="firstname" required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="">Last Name</label>
-                                        <input type="text" class="form-control" id="lastname" name="lastname" required>
+                                        <label for="">Nama UMKM</label>
+                                        <input type="text" class="form-control" id="nama_umkm" name="nama_umkm" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="">Role</label>
-                                        <select class="form-control" name="role" id="role" class="form-control">
-                                            <option value="#" selected>- Choose Section -</option>
-                                            <option value="Master">Master</option>
+                                        <select name="role" id="role" class="form-control">
+                                            <option value="#" selected>- Pilih Role User -</option>
+                                            <option value="umkm">UMKM</option>
+                                            <option value="admin">Admin</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="">Lokasi UMKM</label>
+                                        <input type="text" class="form-control" id="lokasi_umkm" name="lokasi_umkm" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
                                     <div class="form-group">
                                         <label for="">Password</label>
                                         <input type="password" name="password" id="password" class="form-control">

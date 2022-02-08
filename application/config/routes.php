@@ -55,6 +55,7 @@ $route['translate_uri_dashes']      = FALSE;
 
 // Custom URL
 $route['Login']                     = 'Home/login';
+$route['Register']                  = 'Home/register';
 
 $route['Admin/Add']                 = 'Admin/viewAdd';
 $route['Admin/edit/(:num)']         = 'Admin/getItemsById/$1';
@@ -63,3 +64,7 @@ $route['Admin/delete/(:num)']       = 'Admin/deleteItemsById/$1';
 $route['User/Add']                  = 'User/viewAdd';
 $route['User/edit/(:num)']          = 'User/getItemsById/$1';
 $route['User/delete/(:num)']        = 'User/deleteItemsById/$1';
+
+$route['Kategori/Add']              = 'Kategori/viewAdd';
+$route['Kategori/edit/(:num)']      = 'Kategori/getItemsById/$1';
+$route['Kategori/delete/(:num)']    = 'Kategori/deleteItemsById/$1';

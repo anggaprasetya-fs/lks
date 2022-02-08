@@ -54,6 +54,7 @@
                     </div>
                     <div class="align-items-end">
                         <button type="submit" class="btn btn-success btn-m">Login</button>
+                        <span>Kembali ke <a href="<?=base_url('/')?>">HOME</a> / <a href="<?=base_url('Register')?>">Register</a></span>
                     </div>
                 </div>
                 <div class="col-lg-4"></div>

@@ -19,9 +19,9 @@
                         <div class="row mt-2 align-items-center text-center">
                             <img src="https://bootstrapmade.com/demo/templates/FlexStart/assets/img/testimonials/testimonials-4.jpg" class="rounded mx-auto d-block img-fluid img-thumbnail" width="100px" height="100px">
                         </div>
-                        <p class="text-center mb-5"><?=$this->session->userdata('fullname')?></p>
+                        <p class="text-center mb-5"><?=$this->session->userdata('umkm')?></p>
                         <div class="row mx-2">
-                            <a href="<?=base_url('Admin')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data Items</a>
+                            <a href="<?=base_url('User')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data User</a>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
             <div class="col-lg-10">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Edit Items</h5>
+                        <h5>Edit User</h5>
                     </div>
                     <div class="card-body">
                         <?php
@@ -38,39 +38,30 @@
                         ?>
                         <form action="<?=base_url('User/saveDataItems')?>" method="POST" enctype="multipart/form-data">
                             <div class="row">
-                                <input type="hidden"  name="id" id="id" value="<?=$data->user_id?>">
-                                <div class="col-lg-4">
+                                <input type="hidden" name="id" id="id" value="<?=$data->id_user?>">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Username</label>
-                                        <input type="text" class="form-control" id="username" name="username" value="<?=$data->user_name?>" >
+                                        <label for="">Nama User</label>
+                                        <input type="text" class="form-control" id="username" name="username" value="<?=$data->nama_user?>">
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">First Name</label>
-                                        <input type="text" class="form-control" id="firstname" name="firstname" value="<?=$data->user_first_name?>" >
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="">Last Name</label>
-                                        <input type="text" class="form-control" id="lastname" name="lastname" value="<?=$data->user_last_name?>" >
+                                        <label for="">Nama UMKM</label>
+                                        <input type="text" class="form-control" id="nama_umkm" name="nama_umkm" value="<?=$data->nama_umkm?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Role</label>
-                                        <select class="form-control" name="role" id="role" class="form-control">
-                                            <option value="#" selected>- Choose Section -</option>
-                                            <option value="Master" <?=$data->user_role == 'Master' ? 'selected' : ''?>>Master</option>
-                                        </select>
+                                        <label for="">Lokasi UMKM</label>
+                                        <input type="text" class="form-control" id="lokasi_umkm" name="lokasi_umkm" value="<?=$data->lokasi_umkm?>">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Password <span class="text-danger">* Fill if needed to change</span></label>
+                                        <label for="">Password <span class="text-danger">*Isi password apabila ingin diubah</span></label>
                                         <input type="password" name="password" id="password" class="form-control">
                                     </div>
                                 </div>

@@ -19,7 +19,7 @@
                         <div class="row mt-2 align-items-center text-center">
                             <img src="https://bootstrapmade.com/demo/templates/FlexStart/assets/img/testimonials/testimonials-4.jpg" class="rounded mx-auto d-block img-fluid img-thumbnail" width="100px" height="100px">
                         </div>
-                        <p class="text-center mb-5"><?=$this->session->userdata('fullname')?></p>
+                        <p class="text-center mb-5"><?=$this->session->userdata('umkm')?></p>
                         <div class="row mx-2">
                             <a href="<?=base_url('Admin')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data Items</a>
                         </div>
@@ -36,36 +36,52 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Title</label>
-                                        <input type="text" class="form-control" id="title" name="title" required>
+                                        <label for="">Nama Barang</label>
+                                        <input type="text" class="form-control" name="nama_barang" id="nama_barang" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Section</label>
-                                        <select class="form-control" name="section" id="section" class="form-control">
-                                            <option value="#">- Choose Section -</option>
-                                            <option value="Team">Team</option>
-                                            <option value="Services">Services</option>
-                                        </select>
+                                        <label for="">Harga Barang</label>
+                                        <input type="number" class="form-control" name="harga_barang" id="harga_barang" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Caption</label>
-                                        <textarea name="caption" id="caption" cols="30" rows="10" class="form-control"></textarea>
+                                        <label for="">Kategori Barang</label>
+                                        <select name="kategori_barang" id="kategori_barang" class="form-control">
+                                            <option value="#" selected>- Pilih Kategori Barang -</option>
+                                            <?php
+                                            foreach ($kategori as $data_kategori) 
+                                            {
+                                            ?>
+                                                <option value="<?=$data_kategori->id_kategori?>"><?=$data_kategori->nama_kategori?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Author</label>
-                                        <input type="text" name="author" id="author" class="form-control" value="<?=$this->session->userdata('fullname')?>" readonly>
+                                        <label for="">UMKM Penjual</label>
+                                        <input type="text" class="form-control" name="penjual" id="penjual" readonly value="<?=$this->session->userdata('umkm');?>">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Image</label>
-                                        <input type="file" name="data_image" id="data_image" class="form-control-file">
+                                        <label for="">Deskripsi Barang</label>
+                                        <textarea name="deskripsi_barang" id="deskripsi_barang" cols="30" rows="10" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="">Gambar Barang</label>
+                                        <input type="file" name="gambar" id="gambar" class="form-control-file">
                                     </div>
                                 </div>
                             </div>

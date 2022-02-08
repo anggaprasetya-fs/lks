@@ -28,12 +28,29 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('home/index');
+		$data['data_all']		= $this->Home_m->getAllDataBarang()->result();
+		$data['kategori']		= $this->Home_m->getKategori()->result();
+		$data['umkm']			= $this->Home_m->getUmkm()->result();
+		$this->load->view('home/index', $data);
 	}
 
 	public function login()
 	{
 		$this->load->view('home/login');
+	}
+
+	public function register()
+	{
+		$this->load->view('home/register');
+	}
+
+	public function filter()
+	{
+		$kategori 	= $this->input->post('filter_kategori') != NULL ? $this->input->post('filter_kategori') : NULL;
+		$penjual	= $this->input->post('filter_penjual') != NULL ? $this->input->post('filter_penjual') : NULL;
+
+		$data['filter']		= $this->Home_m->filterBarang($kategori, $penjual)->result();
+		$this->load->view('home/filter', $data);
 	}
 
     public function cekLogin()
@@ -48,9 +65,10 @@ class Home extends CI_Controller {
         if ($enter->num_rows() > 0) 
         {
             $sessArray  = [
-				'id'		=> $enter->result()[0]->user_id,
-                'name'      => $enter->result()[0]->user_name,
-                'fullname'  => $enter->result()[0]->user_first_name.' '.$enter->result()[0]->user_last_name,
+				'id'		=> $enter->result()[0]->id_user,
+                'name'      => $enter->result()[0]->nama_user,
+				'umkm'		=> $enter->result()[0]->nama_umkm,
+				'role'		=> $enter->result()[0]->role_user == 'admin' ? TRUE : FALSE,
                 'login'     => TRUE
             ];
 
@@ -67,8 +85,9 @@ class Home extends CI_Controller {
 
 	public function sample()
 	{
-		$enter 	= $this->Home_m->get();
-		
+		$enter 	= $this->Home_m->filterBarang(3, 1);
+		// echo '<pre>';
+		// print_r($enter);
 		foreach ($enter->result() as $key) 
 		{
 			echo '<pre>';

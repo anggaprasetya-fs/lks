@@ -19,7 +19,7 @@
                         <div class="row mt-2 align-items-center text-center">
                             <img src="https://bootstrapmade.com/demo/templates/FlexStart/assets/img/testimonials/testimonials-4.jpg" class="rounded mx-auto d-block img-fluid img-thumbnail" width="100px" height="100px">
                         </div>
-                        <p class="text-center mb-5"><?=$this->session->userdata('fullname')?></p>
+                        <p class="text-center mb-5"><?=$this->session->userdata('umkm')?></p>
                         <div class="row mx-2">
                             <a href="<?=base_url('Admin')?>" class="btn btn-primary btn-block"><i class="fas fa-clipboard"></i> List Data Items</a>
                         </div>
@@ -38,39 +38,55 @@
                         ?>
                         <form action="<?=base_url('Admin/saveDataItems')?>" method="POST" enctype="multipart/form-data">
                             <div class="row">
+                                <input type="hidden" name="id" id="id" value="<?=$data->id_barang?>">
                                 <div class="col-lg-6">
-                                    <input type="hidden" class="" name="id" id="id" value="<?=$data->data_id?>">
                                     <div class="form-group">
-                                        <label for="">Title</label>
-                                        <input type="text" class="form-control" id="title" name="title" value="<?=$data->data_title?>">
+                                        <label for="">Nama Barang</label>
+                                        <input type="text" class="form-control" name="nama_barang" id="nama_barang" value="<?=$data->nama_barang?>">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Section</label>
-                                        <select class="form-control" name="section" id="section" class="form-control">
-                                            <option value="#">- Choose Section -</option>
-                                            <option value="Team" <?=$data->data_role == 'Team' ? 'selected' : ''?> >Team</option>
-                                            <option value="Services" <?=$data->data_role == 'Services' ? 'selected' : ''?> >Services</option>
-                                        </select>
+                                        <label for="">Harga Barang</label>
+                                        <input type="number" class="form-control" name="harga_barang" id="harga_barang" value="<?=$data->harga_barang?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Caption</label>
-                                        <textarea name="caption" id="caption" cols="30" rows="10" class="form-control"><?=$data->data_caption?></textarea>
+                                        <label for="">Kategori Barang</label>
+                                        <select name="kategori_barang" id="kategori_barang" class="form-control">
+                                            <option value="#">- Pilih Kategori Barang -</option>
+                                            <?php
+                                            foreach ($kategori as $data_kategori) 
+                                            {
+                                            ?>
+                                                <option value="<?=$data_kategori->id_kategori?>" <?=$data_kategori->id_kategori == $data->kategori_barang ? 'selected' : ''?> ><?=$data_kategori->nama_kategori?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Author</label>
-                                        <input type="text" name="author" id="author" class="form-control" value="<?=$data->user_name?>" readonly>
+                                        <label for="">UMKM Penjual</label>
+                                        <input type="text" class="form-control" name="penjual" id="penjual" readonly value="<?=$data->nama_umkm?>">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="">Image <span class="text-danger">*Choose image if needed to edit</span></label>
-                                        <input type="file" name="data_image" id="data_image" class="form-control-file">
+                                        <label for="">Deskripsi Barang</label>
+                                        <textarea name="deskripsi_barang" id="deskripsi_barang" cols="30" rows="10" class="form-control"><?=$data->deskripsi_barang?></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="">Gambar Barang </label>
+                                        <input type="file" name="gambar" id="gambar" class="form-control-file">
                                     </div>
                                 </div>
                             </div>
