@@ -16,8 +16,9 @@ class Admin extends CI_Controller
 
     public function index()
     {
-        $enter = $this->session->userdata('role') == TRUE ? $this->Admin_m->getData() : $this->Admin_m->getDataByUser($this->session->userdata('id'));
-        
+        $enter  = $this->session->userdata('role') == TRUE ? $this->Admin_m->getData() : $this->Admin_m->getDataByUser($this->session->userdata('id'));
+        $data[] = [];
+
         if($enter->result() > 0)
         {
             $data['postingan'] = $enter->result();
